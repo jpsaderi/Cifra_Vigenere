@@ -52,6 +52,7 @@ class Criptografia_Vigenere(object):
         texto = re.sub('[^A-Z]', '', texto)
 
         return texto
+    
     def Repetir_chave(self, chave, tamanho):
 
         chave = chave.upper()
