@@ -37,6 +37,19 @@ def Decriptar_mensagem():
     
     input("Pressione ENTER para continuar")
 
+def Atacar_mensagem():
+    print('\t-----------------')
+    print("\tCifra de Vigenere")
+    print('\t-----------------\n')
+
+    texto_entrada = input('Digite o texto que deve ser decifrado: ')
+
+    texto_decifrado = ''
+    print('O texto encriptado:')
+    print('\t', texto_entrada)
+    print('O texto de saida:')
+    print('\t', texto_decifrado)
+
 #main
 while(True):
     print('\t-----------------')
