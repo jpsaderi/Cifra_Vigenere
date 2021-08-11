@@ -1,6 +1,5 @@
 import re, string
-
-desconsiderar = ' !#$%&()*+,-./'
+from constantes import DESCONSIDERAR
 
 class Criptografia_Vigenere(object):
     def __init__(self):
@@ -30,7 +29,7 @@ class Criptografia_Vigenere(object):
 
         contador = 0
         for i, letra in enumerate(texto):
-            if letra in desconsiderar:
+            if letra in DESCONSIDERAR:
                 texto_cifrado += letra
                 contador += 1
             else:
@@ -50,7 +49,7 @@ class Criptografia_Vigenere(object):
 
         contador = 0
         for i, letra in enumerate(texto):
-            if letra in desconsiderar:
+            if letra in DESCONSIDERAR:
                 texto_decifrado += letra
                 contador += 1
             else:
@@ -63,7 +62,7 @@ class Criptografia_Vigenere(object):
 
     def Processar_texto_ascii(self, texto):
         texto = texto.upper()
-        texto = re.sub(rf'[^A-Z{desconsiderar}]', '', texto)
+        texto = re.sub(rf'[^A-Z{DESCONSIDERAR}]', '', texto)
     
         return texto
     
