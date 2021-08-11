@@ -1,4 +1,6 @@
-import re
+import re, string
+
+desconsiderar = ' !#$%&()*+,-./'
 
 class Criptografia_Vigenere(object):
     def __init__(self):
@@ -20,41 +22,52 @@ class Criptografia_Vigenere(object):
         return tabela
 
     def Encriptar(self, texto, chave):
-        texto = self.Processar_texto(texto)
+        texto = self.Processar_texto_ascii(texto)
+
         chave_repetida = self.Repetir_chave(chave, len(texto))
         
         texto_cifrado = ''
 
+        contador = 0
         for i, letra in enumerate(texto):
-            indice_letra = ord(letra.upper()) - 65
-            indice_chave = ord(chave_repetida[i]) - 65
+            if letra in desconsiderar:
+                texto_cifrado += letra
+                contador += 1
+            else:
+                indice_letra = ord(letra.upper()) - 65
+                indice_chave = ord(chave_repetida[i-contador]) - 65
 
-            letra_cifrada = self.tabela[indice_chave][indice_letra]
+                letra_cifrada = self.tabela[indice_chave][indice_letra]
 
-            texto_cifrado += letra_cifrada
+                texto_cifrado += letra_cifrada
 
         return texto_cifrado
 
     def Decriptar(self, texto, chave):
+        texto = self.Processar_texto_ascii(texto)
         chave_repetida = self.Repetir_chave(chave, len(texto))
         texto_decifrado = ''
 
+        contador = 0
         for i, letra in enumerate(texto):
-            indice_chave = ord(chave_repetida[i]) - 65
+            if letra in desconsiderar:
+                texto_decifrado += letra
+                contador += 1
+            else:
+                indice_chave = ord(chave_repetida[i-contador]) - 65
 
-            letra_decifrada = chr(self.tabela[indice_chave].index(letra) + 65)
+                letra_decifrada = chr(self.tabela[indice_chave].index(letra) + 65)
 
-            texto_decifrado += letra_decifrada
+                texto_decifrado += letra_decifrada
         return texto_decifrado
-        
-    def Processar_texto(self, texto):
-        texto = texto.upper()
-        texto = re.sub('[^A-Z]', '', texto)
 
+    def Processar_texto_ascii(self, texto):
+        texto = texto.upper()
+        texto = re.sub(rf'[^A-Z{desconsiderar}]', '', texto)
+    
         return texto
     
     def Repetir_chave(self, chave, tamanho):
-
         chave = chave.upper()
         chave_repetida = ''
         indice = 0
