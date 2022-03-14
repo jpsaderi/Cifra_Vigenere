@@ -1,5 +1,5 @@
-# SC_P1
- Projeto 1 Segurança Computacional
+# Cifra de Vigenere
 
 Para executar, basta usar:
+
 python3 main.py
